@@ -11,6 +11,7 @@ const Header = ({addRecipe}:Props) => {
     >
      <h1>MY RECIPES👨🏻‍🍳</h1>
      <Button
+     type='button'
      label={'ADD RECIPE'}
      bg={'hsl(197, 100%, 45%)'}
      color={'black'}
