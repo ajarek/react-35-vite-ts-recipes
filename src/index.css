@@ -17,4 +17,5 @@ body{
   min-height: 100vh;
   background-color:#1d1e33;
   padding: 2rem;
+  position: relative;
 }

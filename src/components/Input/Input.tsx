@@ -1,4 +1,5 @@
 import React from 'react'
+import './Input.css'
 type Props ={
   name: string
   type: string
@@ -8,7 +9,7 @@ type Props ={
 
 const Input = ({type, value, onChange, name}:Props) => {
   return (
-    <div>
+    <div className={'input'}>
       <input
        name={name}
        type={type} 
