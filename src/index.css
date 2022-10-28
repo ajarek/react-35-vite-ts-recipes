@@ -19,3 +19,11 @@ body{
   padding: 2rem;
   position: relative;
 }
+.result{
+  width:200px ;
+  color: aliceblue;
+  display: flex;
+  flex-direction:column ;
+  padding: 0.5rem;
+  border: solid;
+}
