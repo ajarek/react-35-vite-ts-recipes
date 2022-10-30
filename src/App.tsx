@@ -54,9 +54,7 @@ function App() {
   const [inputFields, setInputFields] = useState([{ name: '' }])
   const [inputFieldsStep, setInputFieldsStep] = useState([{ name: '' }])
   const [arrayRecipe, setArrayRecipe] = useState([])
-  const [isActive, setIsActive] = useState(false)
 
-  
 
   const deleteRecipe = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLTextAreaElement
@@ -65,12 +63,9 @@ function App() {
   }
   const viewMoreRecipe = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLTextAreaElement
-    const fragment =target.parentNode?.parentNode?.previousSibling?.parentElement
-
-
-      console.dir(fragment);
-      
-      setIsActive(!isActive)
+    // const fragment = target.parentElement?.parentElement?.previousElementSibling?.children[2]
+    const fragment= target.closest('.result')?.querySelector('.row')
+    fragment?.classList.toggle('none')
   }
 
   return (
@@ -107,26 +102,30 @@ function App() {
         <div className='wrapper'>
           {isSubmit
             ? arrayRecipe &&
-              arrayRecipe.flat(Infinity).map((el: ABC, index) => {
+              arrayRecipe.flat(Infinity).map((el: ABC, index: number) => {
                 return (
                   <div
                     className={'result'}
                     key={index}
                   >
-                    <p>{el.title}</p>
-                    <p>{el.desc}</p>
-                    {isActive ? (
-                      <div
-                       className='row' id={String(index)}  >
-                        {el.inFi.map((e: ABC, i: number) => (
-                          <p key={i}>{e.name}</p>
-                        ))}
-                        {el.inFS.map((e: ABC, i: number) => (
-                          <p key={i}>{e.name}</p>
-                        ))}
-                      </div>
-                    ) : null}
-                    <div className='layout'>
+                    <div className={'info'}>
+                      <h4>{el.title}</h4>
+                      <p>{el.desc}</p>
+                    
+                    <div
+                      className={'row'}
+                      id={String(index)}
+                    > <h5>Ingredients:</h5>
+                      {el.inFi.map((e: ABC, i: number) => (
+                        <p key={i}>{e.name}</p>
+                      ))}
+                      <h5>Steps:</h5>
+                      {el.inFS.map((e: ABC, i: number) => (
+                        <p key={i}>{e.name}</p>
+                      ))}
+                    </div>
+                    </div>
+                    <div className={'layout'}>
                       <Button
                         type='submit'
                         label={'VIEW MORE'}

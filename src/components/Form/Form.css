@@ -25,3 +25,6 @@
   background-color:#2f2f2f ;
   padding: 1rem;
 }
+.form input[type="text"]{
+  padding: 0 0.5rem;
+}

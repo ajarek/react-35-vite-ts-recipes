@@ -123,7 +123,7 @@ const Form = ({ closeForm }: Props) => {
           <Button
             type='submit'
             label={'SUBMIT'}
-            bg='#5cc0eb'
+            bg='hsl(153, 100%, 82%)'
             color='black'
             maxWidth=''
             fontSize='1rem'
