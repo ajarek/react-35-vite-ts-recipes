@@ -93,6 +93,8 @@ const Form = ({ closeForm }: Props) => {
             label={'ADD INGREDIENT'}
             bg='#5cc0eb'
             color='black'
+            maxWidth=''
+            fontSize='1rem'
             onClick={addFields}
           />
 
@@ -113,6 +115,8 @@ const Form = ({ closeForm }: Props) => {
             label={'ADD STEP'}
             bg='#5cc0eb'
             color='black'
+            maxWidth=''
+            fontSize='1rem'
             onClick={addFieldsStep}
           />
 
@@ -121,6 +125,8 @@ const Form = ({ closeForm }: Props) => {
             label={'SUBMIT'}
             bg='#5cc0eb'
             color='black'
+            maxWidth=''
+            fontSize='1rem'
             onClick={() =>addRecipe()}
           />
         </form>

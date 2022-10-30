@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useRef, useState } from 'react'
+import Button from './components/Button/Button'
 import Form from './components/Form/Form'
 import Header from './components/Header/Header'
-
 
 export type GlobalContent = {
   newRecipe: boolean
@@ -33,17 +33,17 @@ export const AppContext = createContext<GlobalContent>({
   setInputFields: () => {},
   inputFieldsStep: [{ name: '' }],
   setInputFieldsStep: () => {},
-  arrayRecipe:[],
+  arrayRecipe: [],
   setArrayRecipe: (c: any) => {},
 })
 export const useGlobalContext = () => useContext(AppContext)
 
 interface ABC {
-  title: string;
-  desc: string;
-  name: string;
-  inFi:[]
-  inFS:[]
+  title: string
+  desc: string
+  name: string
+  inFi: []
+  inFS: []
 }
 
 function App() {
@@ -54,6 +54,24 @@ function App() {
   const [inputFields, setInputFields] = useState([{ name: '' }])
   const [inputFieldsStep, setInputFieldsStep] = useState([{ name: '' }])
   const [arrayRecipe, setArrayRecipe] = useState([])
+  const [isActive, setIsActive] = useState(false)
+
+  
+
+  const deleteRecipe = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLTextAreaElement
+    const element = target.closest('.result')
+    element?.remove()
+  }
+  const viewMoreRecipe = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLTextAreaElement
+    const fragment =target.parentNode?.parentNode?.previousSibling?.parentElement
+
+
+      console.dir(fragment);
+      
+      setIsActive(!isActive)
+  }
 
   return (
     <AppContext.Provider
@@ -86,30 +104,53 @@ function App() {
             }}
           />
         ) : null}
-        {isSubmit
-          ?
-          
-          
-          arrayRecipe &&
-            
-             arrayRecipe.flat(Infinity).map((el:ABC,index,arr)=>{
-              console.log(el);
-              
-             return(
-              <div className={'result'} key={index} >
-             <p>{el.title}</p>
-             <p>{el.desc}</p>
-             {el.inFi.map((e:ABC,i:number)=><p key={i}>{e.name}</p>)}
-             {el.inFS.map((e:ABC,i:number)=><p key={i}>{e.name}</p>)}
-              
-             
-             </div>
-             )
-            })
-             
-             
-            
-          : null}
+        <div className='wrapper'>
+          {isSubmit
+            ? arrayRecipe &&
+              arrayRecipe.flat(Infinity).map((el: ABC, index) => {
+                return (
+                  <div
+                    className={'result'}
+                    key={index}
+                  >
+                    <p>{el.title}</p>
+                    <p>{el.desc}</p>
+                    {isActive ? (
+                      <div
+                       className='row' id={String(index)}  >
+                        {el.inFi.map((e: ABC, i: number) => (
+                          <p key={i}>{e.name}</p>
+                        ))}
+                        {el.inFS.map((e: ABC, i: number) => (
+                          <p key={i}>{e.name}</p>
+                        ))}
+                      </div>
+                    ) : null}
+                    <div className='layout'>
+                      <Button
+                        type='submit'
+                        label={'VIEW MORE'}
+                        bg='hsl(197, 100%, 45%)'
+                        color='black'
+                        maxWidth='135px'
+                        fontSize='0.7rem'
+                        onClick={(e) => viewMoreRecipe(e)}
+                      />
+                      <Button
+                        type='submit'
+                        label={'REMOVE RECIPE'}
+                        bg='hsl(350, 96%, 43%)'
+                        color='#fff'
+                        maxWidth='135px'
+                        fontSize='0.7rem'
+                        onClick={(e) => deleteRecipe(e)}
+                      />
+                    </div>
+                  </div>
+                )
+              })
+            : null}
+        </div>
       </div>
     </AppContext.Provider>
   )

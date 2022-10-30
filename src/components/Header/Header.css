@@ -1,9 +1,10 @@
 .header{
+  max-width: 300px;
   width: 100%;
   color: aliceblue;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid;
+  margin-bottom: 1rem;
 }

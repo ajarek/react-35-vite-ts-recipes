@@ -15,6 +15,8 @@ const Header = ({addRecipe}:Props) => {
      label={'ADD RECIPE'}
      bg={'hsl(197, 100%, 45%)'}
      color={'black'}
+     maxWidth={'200px'}
+     fontSize={'1.5rem'}
      onClick={addRecipe}
      />
     </div>
